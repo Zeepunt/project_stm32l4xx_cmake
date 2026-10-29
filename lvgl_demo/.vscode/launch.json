@@ -1,0 +1,66 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // 调试会话名称
+            "name": "STM32L475VE Debug",
+
+            // 调试器类型
+            "type": "probe-rs-debug",
+
+            // 请求类型
+            // launch 表示启动新会话并烧录固件
+            // attach 表示附加到已在运行的目标
+            "request": "launch",
+
+            // 芯片型号
+            "chip": "STM32L475VETx",
+
+            // 当前工作目录
+            "cwd": "${workspaceFolder}",
+
+            // 连接时保持复位状态, 确保在芯片复位后立即接管
+            "connectUnderReset": false,
+
+            // 烧录配置
+            "flashingConfig": {
+                // 是否在调试前自动烧录固件
+                "flashingEnabled": true,
+                // 烧录前校验: 对比 Flash 内容与待烧录文件, 不一致才执行烧录
+                "verifyBeforeFlashing": true,
+                // 烧录后校验: 烧录完成后读回数据, 确认写入正确
+                "verifyAfterFlashing": true,
+                // 烧录完成后是否暂停 CPU (Reset_Handler)
+                "haltAfterReset": false
+            },
+
+            // 核心配置
+            "coreConfigs": [
+                {
+                    "coreIndex": 0,
+                    // 程序文件路径
+                    "programBinary": "${workspaceFolder}/build/lvgl_demo.elf",
+
+                    // 启用 RTT
+                    "rttEnabled": true,
+                    // 定义每个 RTT 通道的数据格式
+                    "rttChannelFormats": [
+                        {
+                            // RTT 上行通道编号
+                            "channelNumber": 0,
+                            // 数据格式
+                            // String 表示发送完整的文本
+                            // Defmt 发送二进制编码的索引
+                            "dataFormat": "String",
+                            // 在每行 RTT 输出前加上主机端时间戳
+                            "showTimestamps": true
+                        }
+                    ]
+                }
+            ],
+
+            // 调试前先执行 tasks.json 里 label 为 "STM32L475VE Build" 的任务
+            "preLaunchTask": "STM32L475VE Build"
+        }
+    ]
+}

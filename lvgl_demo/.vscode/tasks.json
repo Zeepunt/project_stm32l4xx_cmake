@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // 任务标签, 需要与 launch.json 中的 preLaunchTask 值一致
+            "label": "STM32L475VE Build",
+
+            // 通过系统 shell 执行命令
+            "type": "shell",
+
+            // 命令: cmake --build build
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build"
+            ],
+
+            "options": {
+                // 任务执行的工作目录
+                "cwd": "${workspaceFolder}"
+            }
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+rsource "$(SDK_STM32L4XX_PATH)/Kconfig"
